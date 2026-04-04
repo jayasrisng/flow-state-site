@@ -60,7 +60,7 @@ export default function ConcertModePage() {
   const [isRunning, setIsRunning] = useState(true);
   const [concertMode, setConcertMode] = useState(true);
   const [metrics, setMetrics] = useState({ energy: 32, bass: 35, mid: 30, treble: 34 });
-  const TRACK_URL = "/sounds/rickroll.mp3";
+  const TRACK_URL = `${import.meta.env.BASE_URL}sounds/rickroll.mp3`;
   const shouldAutoPlay = ((location.state as { autoPlay?: boolean } | null)?.autoPlay ?? false);
 
   const COLORS = useMemo(
