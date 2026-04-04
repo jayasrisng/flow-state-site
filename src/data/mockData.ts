@@ -7,6 +7,8 @@ import {
   Waves,
 } from "lucide-react";
 
+const ASSET_BASE = import.meta.env.BASE_URL;
+
 export const howItWorks = [
   {
     title: "log in instantly",
@@ -94,17 +96,17 @@ export const playlists = [
   {
     title: "alt / grunge energy",
     subtitle: "nirvana, foo fighters, smashing pumpkins",
-    image: "/covers/foo.jpg",
+    image: `${ASSET_BASE}covers/foo.jpg`,
   },
   {
     title: "k-pop focus",
     subtitle: "bts • high energy + melodic",
-    image: "/covers/ari.jpg",
+    image: `${ASSET_BASE}covers/ari.jpg`,
   },
   {
     title: "classical flow",
     subtitle: "m.s. subbulakshmi • calm + immersive",
-    image: "/covers/class.jpg",
+    image: `${ASSET_BASE}covers/class.jpg`,
   },
 ];
 

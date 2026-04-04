@@ -17,6 +17,8 @@ import CursorGlow from "../components/CursorGlow";
 import ClickRipple from "../components/ClickRipple";
 
 export default function LandingPage() {
+  const assetBase = import.meta.env.BASE_URL;
+
   return (
     <div className="relative min-h-screen">
       <CursorGlow /> 
@@ -113,7 +115,7 @@ export default function LandingPage() {
         <section id="how-it-works" className="section-shell py-20 relative">
 
           <img
-            src="/logo.png" // or whatever your file is
+            src={`${assetBase}logo.png`}
             alt="flow state logo"
             className="pointer-events-none absolute right-10 top-10 w-68 opacity-80"
           />
@@ -193,7 +195,7 @@ export default function LandingPage() {
 
         <section id="team" className="section-shell py-20 relative">
           <img
-            src="/team.JPG" 
+            src={`${assetBase}team.JPG`}
             alt="team"
             className="pointer-events-none absolute right-10 top-10 w-68 opacity-80"
           />
