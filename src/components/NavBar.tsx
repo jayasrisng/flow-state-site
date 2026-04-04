@@ -2,10 +2,14 @@ import { Link, useLocation } from "react-router-dom";
 import { Volume2, VolumeX } from "lucide-react";
 import { useState } from "react";
 import logo from "../assets/logo.png";
+import {
+  isClickSoundEnabled,
+  setClickSoundEnabled,
+} from "../utils/playClickSound";
 
 export default function NavBar() {
   const location = useLocation();
-  const [soundOn, setSoundOn] = useState(true);
+  const [soundOn, setSoundOn] = useState(isClickSoundEnabled);
 
   const isLanding = location.pathname === "/";
 
@@ -64,7 +68,11 @@ export default function NavBar() {
 
           <button
             type="button"
-            onClick={() => setSoundOn((prev) => !prev)}
+            onClick={() => {
+              const nextValue = !soundOn;
+              setSoundOn(nextValue);
+              setClickSoundEnabled(nextValue);
+            }}
             className="hidden h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/70 transition hover:border-cyan-300/25 hover:bg-white/8 hover:text-cyan-300 sm:inline-flex"
             aria-label={soundOn ? "Turn sound off" : "Turn sound on"}
             title={soundOn ? "sound on" : "sound off"}
