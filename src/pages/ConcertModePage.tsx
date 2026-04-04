@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 
 type AudioState = {
@@ -451,7 +451,7 @@ export default function ConcertModePage() {
     };
   }, [COLORS, concertMode]);
 
-  const ensureAudioGraph = async () => {
+  const ensureAudioGraph = useCallback(async () => {
     const audioEl = audioRef.current;
     if (!audioEl) return null;
 
@@ -480,23 +480,30 @@ export default function ConcertModePage() {
     }
 
     return audioEl;
-  };
+  }, []);
 
-  const startPlayback = async () => {
+  const startPlayback = useCallback(async () => {
     const audioEl = await ensureAudioGraph();
     if (!audioEl) return;
     audioEl.volume = 1;
     await audioEl.play();
     setIsRunning(true);
-  };
+  }, [ensureAudioGraph]);
+
+  const autoStartPlayback = useCallback(async () => {
+    const audioEl = await ensureAudioGraph();
+    if (!audioEl) return;
+    audioEl.volume = 1;
+    await audioEl.play();
+  }, [ensureAudioGraph]);
 
   useEffect(() => {
     if (!shouldAutoPlay) return;
 
-    startPlayback().catch(() => {
-      setIsRunning(false);
+    autoStartPlayback().catch(() => {
+      // ignore autoplay failures (browser policies may block without gesture)
     });
-  }, [shouldAutoPlay]);
+  }, [autoStartPlayback, shouldAutoPlay]);
 
   useEffect(
     () => () => {
