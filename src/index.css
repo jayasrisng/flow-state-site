@@ -1,0 +1,212 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #040816;
+  --bg-soft: #0a1030;
+  --panel: rgba(10, 16, 48, 0.58);
+  --panel-strong: rgba(16, 24, 64, 0.82);
+  --border: rgba(102, 153, 255, 0.16);
+  --text: #f7f8ff;
+  --muted: #b7bfdc;
+  --indigo: #3532c7;
+  --blue: #2e74ff;
+  --cyan: #1fdcff;
+  --violet: #8f4cff;
+  --magenta: #d542ff;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background:
+    radial-gradient(circle at 50% 18%, rgba(53, 50, 199, 0.55), transparent 32%),
+    radial-gradient(circle at 20% 80%, rgba(213, 66, 255, 0.18), transparent 24%),
+    radial-gradient(circle at 85% 82%, rgba(31, 220, 255, 0.16), transparent 22%),
+    linear-gradient(180deg, #02040f 0%, #070d28 35%, #0a1040 70%, #050816 100%);
+  color: var(--text);
+  font-family:
+    Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  overflow-x: hidden;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+.glass {
+  background: var(--panel);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid var(--border);
+  box-shadow:
+    0 10px 40px rgba(0, 0, 0, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.glow-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.glow-card::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  background: linear-gradient(
+    135deg,
+    rgba(124, 92, 255, 0.42),
+    rgba(40, 215, 255, 0.24),
+    rgba(255, 79, 216, 0.2)
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  border-radius: inherit;
+  z-index: 0;
+}
+
+.glow-card:hover::before {
+  opacity: 1;
+}
+
+.glow-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.btn-primary {
+  @apply inline-flex items-center justify-center rounded-full px-6 py-3 text-sm font-semibold transition duration-300;
+  background: linear-gradient(135deg, var(--violet), var(--blue), var(--cyan));
+  color: white;
+  box-shadow:
+    0 10px 30px rgba(53, 50, 199, 0.35),
+    0 0 30px rgba(31, 220, 255, 0.12);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px) scale(1.01);
+  box-shadow:
+    0 16px 40px rgba(53, 50, 199, 0.45),
+    0 0 36px rgba(31, 220, 255, 0.18);
+}
+
+.btn-secondary {
+  @apply inline-flex items-center justify-center rounded-full px-6 py-3 text-sm font-semibold transition duration-300;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.04);
+  color: white;
+  backdrop-filter: blur(10px);
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateY(-2px);
+}
+
+.input-field {
+  @apply w-full rounded-2xl px-4 py-3 outline-none transition;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: white;
+}
+
+.input-field:focus {
+  border-color: rgba(124, 92, 255, 0.65);
+  box-shadow: 0 0 0 4px rgba(124, 92, 255, 0.15);
+}
+
+.section-shell {
+  @apply mx-auto max-w-7xl px-6 sm:px-8 lg:px-10;
+}
+
+.noise {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.06;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.09) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.09) 1px, transparent 1px);
+  background-size: 120px 120px;
+  mask-image: radial-gradient(circle at center, black, transparent 85%);
+}
+
+.pulse-ring {
+  animation: pulseRing 2.4s ease-out infinite;
+}
+
+@keyframes pulseRing {
+  0% {
+    transform: scale(0.96);
+    opacity: 0.7;
+  }
+  70% {
+    transform: scale(1.08);
+    opacity: 0.12;
+  }
+  100% {
+    transform: scale(1.08);
+    opacity: 0;
+  }
+}
+
+.wave-bg {
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 55vh;
+  pointer-events: none;
+  opacity: 0.8;
+  background:
+    radial-gradient(circle at 15% 100%, rgba(213, 66, 255, 0.22), transparent 30%),
+    radial-gradient(circle at 85% 100%, rgba(31, 220, 255, 0.18), transparent 28%);
+}
+
+.wave-bg::before,
+.wave-bg::after {
+  content: "";
+  position: absolute;
+  left: -10%;
+  right: -10%;
+  height: 180px;
+  border-radius: 50%;
+  border-bottom: 2px solid rgba(143, 76, 255, 0.35);
+  filter: blur(0.3px);
+}
+
+.wave-bg::before {
+  bottom: 90px;
+  transform: scaleY(1.4);
+  box-shadow:
+    0 14px 0 rgba(143, 76, 255, 0.18),
+    0 28px 0 rgba(46, 116, 255, 0.18),
+    0 42px 0 rgba(31, 220, 255, 0.16),
+    0 56px 0 rgba(213, 66, 255, 0.15),
+    0 70px 0 rgba(143, 76, 255, 0.12),
+    0 84px 0 rgba(31, 220, 255, 0.10);
+}
+
+.wave-bg::after {
+  bottom: 0;
+  transform: scaleY(1.8);
+  box-shadow:
+    0 16px 0 rgba(213, 66, 255, 0.16),
+    0 32px 0 rgba(143, 76, 255, 0.16),
+    0 48px 0 rgba(46, 116, 255, 0.14),
+    0 64px 0 rgba(31, 220, 255, 0.14),
+    0 80px 0 rgba(143, 76, 255, 0.12);
+}
+
+@keyframes flowRipple {
+  0% {
+    transform: scale(0.6);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(7);
+    opacity: 0;
+  }
+}
